@@ -96,10 +96,12 @@ class PhyloPlugin(ProfilePlugin):
         if args.update_phylo:
             usher_add_sample(args)
         else:
-            print("Not Running phylogeny")
+            pass
             
-    def pre_checks(self,args) -> None:
-        pass
+    def pre_process(self,args) -> None:
+        if args.update_phylo:
+            logging.debug("Setting `--call-whole-genome` to True")
+            args.call_whole_genome = True
 
-    def post_checks(self,args) -> None:
+    def post_process(self,args) -> None:
         pass
