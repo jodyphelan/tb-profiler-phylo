@@ -65,7 +65,7 @@ def cli():
             if args.db=="who-v2" and not args.external_db and pp.nofile(sys.base_prefix+"/share/tbprofiler/who-v2.fasta"):
                 logging.error("Can't find the tbdb file at %s. Please run 'tb-profiler update_tbdb' to load the default library or specify another using the '--external_db' flag" % sys.base_prefix)
                 quit(1)
-            args.conf = pp.get_db(tbp.utils.get_default_data_dir(),args.external_db)
+            args.conf = pp.get_db(args.db_dir,args.external_db)
         args.func(args)
     else:
         argparser.print_help(sys.stderr)
