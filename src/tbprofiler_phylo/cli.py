@@ -34,7 +34,7 @@ def cli():
     parser_sub.add_argument('--db',default='tbdb',help='Mutation panel name')
     parser_sub.add_argument('--external-db',type=str,help='Path to db files prefix (overrides "--db" parameter)')
     parser_sub.add_argument('--dir','-d',default=".",help='Storage directory')
-    parser_sub.add_argument('--db-dir','-d',default=tbp.utils.get_default_db_dir(),help='Storage directory')
+    parser_sub.add_argument('--db-dir',default=tbp.utils.get_default_db_dir(),help='DB directory')
     parser_sub.add_argument('--min-dp',default=10,type=int,help='Bases with depth below this cutoff will be marked as missing')
     parser_sub.add_argument('--threads',default=1,type=int,help='Total number of threads')
     parser_sub.add_argument('--logging',default="INFO",choices=["DEBUG","INFO","WARNING","ERROR","CRITICAL"],help='Logging level')
@@ -45,7 +45,7 @@ def cli():
     parser_sub.add_argument('--vcf',help="Temp firectory to process all files",required=True)
     parser_sub.add_argument('--temp',help="Temp firectory to process all files",type=str,default=".")
     parser_sub.add_argument('--dir','-d',default=".",help='Storage directory')
-    parser_sub.add_argument('--db-dir','-d',default=tbp.utils.get_default_db_dir(),help='Storage directory')
+    parser_sub.add_argument('--db-dir',default=tbp.utils.get_default_db_dir(),help='DB directory')
     parser_sub.add_argument('--logging',default="INFO",choices=["DEBUG","INFO","WARNING","ERROR","CRITICAL"],help='Logging level')
     parser_sub.set_defaults(func=prepare_usher)
 
