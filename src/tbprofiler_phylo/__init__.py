@@ -83,7 +83,7 @@ def calculate_phylogeny(args: argparse.Namespace) -> None:
     run_cmd(f"cat {alignment_file} >> {alignment_file_plus_ref}")
     tmp_vcf = f"{args.files_prefix}.vcf"
     run_cmd(f"faToVcf {alignment_file_plus_ref} {tmp_vcf}")
-    run_cmd(f"iqtree -s {alignment_file} -m GTR+G -nt AUTO",desc="Running IQTree")
+    run_cmd(f"iqtree -s {alignment_file} -m GTR+G -nt 2",desc="Running IQTree")
     prepare_usher(f"{alignment_file}.treefile",tmp_vcf)
     run_cmd(f"mv phylo.pb {args.dir}/results/")
     os.remove("condensed-tree.nh")
