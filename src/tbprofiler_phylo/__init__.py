@@ -62,7 +62,13 @@ def prepare_usher(treefile: str,vcf_file: str) -> None:
 
 def wrapper_function(s: str,args: argparse.Namespace) -> str:
     args.bam = f"{args.dir}/bam/{s}.bam"
-    return prepare_sample_consensus(s,f"{args.dir}/vcf/{s}.vcf.gz",args)
+    return prepare_sample_consensus(
+        sample_name=s,
+        ref=args.conf['ref'],
+        input_vcf=f"{args.dir}/vcf/{s}.vcf.gz",
+        output_file=f"{args.temp}/{s}.consensus.fasta",
+        excluded_regions=args.conf['bedmask']
+    )
 
 def calculate_phylogeny(args: argparse.Namespace) -> None:
     samples = [l.strip() for l in open(args.samples)]
@@ -92,7 +98,7 @@ class PhyloPlugin(ProfilePlugin):
             }
         }
     ]
-    def run(self,args) -> None:
+    def run(self,args, _ ) -> None:
         if args.update_phylo:
             usher_add_sample(args)
         else:
