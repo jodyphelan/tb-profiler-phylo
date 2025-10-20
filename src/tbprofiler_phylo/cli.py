@@ -20,7 +20,8 @@ def main_phylogeny(args):
         'depth_soft': args.min_dp
     }
     tbprofiler_phylo.calculate_phylogeny(args)
-    cleanup(args.files_prefix)
+    if not args.no_clean:
+        cleanup(args.files_prefix)
 
 def prepare_usher(args):
     tbprofiler_phylo.prepare_usher(args.tree,args.vcf)
@@ -38,6 +39,7 @@ def cli():
     parser_sub.add_argument('--min-dp',default=10,type=int,help='Bases with depth below this cutoff will be marked as missing')
     parser_sub.add_argument('--threads',default=1,type=int,help='Total number of threads')
     parser_sub.add_argument('--logging',default="INFO",choices=["DEBUG","INFO","WARNING","ERROR","CRITICAL"],help='Logging level')
+    parser_sub.add_argument('--no-clean',action='store_true',help='Do not clean temporary files')
     parser_sub.set_defaults(func=main_phylogeny)
 
     parser_sub = subparsers.add_parser('prepare_usher', help='Update tbdb')
